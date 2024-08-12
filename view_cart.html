@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Cart</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    {% load static %}
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    {% load static %}
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cart-container {
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin-top: 80px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .cart-container h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .cart-item:hover {
+            background-color: #f1f1f1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .cart-item div {
+            flex: 1;
+        }
+
+        .cart-item h4 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+
+        .cart-item p {
+            margin: 5px 0;
+            color: #6c757d;
+        }
+
+        .cart-item .price {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .cart-item form {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-item input[type="number"] {
+            width: 60px;
+            margin-right: 10px;
+        }
+
+        .cart-item button {
+            margin-left: 10px;
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cart-item button:hover {
+            background-color: #c82333;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .checkout-box {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .checkout-box h3 {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .checkout-box .total {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .checkout-box button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-box button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cart-item img {
+                width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card {
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-pills .nav-link {
+            border-radius: 0;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .product-item {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+     <!-- Navbar Start -->
+     <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <small><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</small>
+                <small class="ms-4"><i class="fa fa-envelope me-2"></i>info@example.com</small>
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small>Follow us:</small>
+                <a class="text-body ms-3" href=""><i class="fab fa-facebook-f"></i></a>
+                <a class="text-body ms-3" href=""><i class="fab fa-twitter"></i></a>
+                <a class="text-body ms-3" href=""><i class="fab fa-linkedin-in"></i></a>
+                <a class="text-body ms-3" href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+            <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                <!-- Navbar Brand Logo Here -->
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="{% url 'customer_dashboard' %}"   class="nav-item nav-link active">Home</a>
+                    <a href="#" class="nav-item nav-link">About Us</a>
+                    <a href="{% url 'list_category_products' %}" class="nav-item nav-link">Products</a>
+                    
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="#" class="dropdown-item">Blog Grid</a>
+                            <a href="#" class="dropdown-item">Our Features</a>
+                            <a href="{% url 'price_chart_customer' %}" class="dropdown-item">View Price Charts</a>
+                            
+                        </div>
+                    </div>
+                    <a href="{% url 'contact' %}"  class="nav-item nav-link">Contact Us</a>
+                    <!--<a href="{% url 'price_chart_customer' %}" class="nav-item nav-link">View Price Charts</a>-->
+                </div>
+                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
+                        <small class="fa fa-shopping-bag text-body"></small>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div><br><br><br><Br>
+        <div class="container cart-container mt-5">
+            {% if cart_items %}
+            
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Quantity (kg)</th>
+                        <th>Price (Rs)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td><img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 100px; height: auto;"></td>
+                        <td>{{ item.product.product_name.product_name }}</td>
+                        <td>{{ item.quantity|floatformat:2 }} kg</td>
+                        <td>Rs {{ item.total_price }}</td>
+                        <td>
+                            <form method="post" action="{% url 'remove_from_cart' item.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                            
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <div class="checkout-box mt-4">
+                <h3>Grand Total</h3>
+                <p class="total">Total: Rs {{item.total_price }}</p>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+                </form>
+            </div><br><br>
+            <div class="continue-shopping">
+                <a href="{% url 'customer_dashboard' %}" class="btn btn-primary">Continue Shopping</a>
+            </div>
+            {% else %}
+            <div class="empty-cart">
+                <p>Your cart is empty.</p>
+            </div>
+            {% endif %}
+        </div>
+        
+</body>
+
+</html>

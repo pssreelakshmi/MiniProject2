@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delivery Boy Profiles</title>
+</head>
+<body>
+    <h1>Delivery Boy Profiles</h1>
+    <ul>
+        {% for deliveryboy in deliveryboys %}
+            <li>
+                Name: {{ deliveryboy.name }}<br>
+                Email: {{ deliveryboy.email }}<br>
+                Phone: {{ deliveryboy.phone }}<br>
+                Address: {{ deliveryboy.address }}<br>
+                Pincode: {{ deliveryboy.pincode }}
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+</body>
+</html>
